@@ -1,0 +1,26 @@
+{
+    "name": "fpbeat/enginedetector",
+    "type": "library",
+    "description": "Website engine detector",
+    "keywords": ["cms", "detect", "engine"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Roman Zhakhov",
+            "email": "beat@mail.ua"
+        }
+    ],
+    "require": {
+        "php": ">=5.6",
+        "ext-mbstring": "*",
+        "guzzlehttp/guzzle": "^6.3",
+        "hassankhan/config": "^1.1",
+        "imangazaliev/didom": "^1.13",
+        "phpfastcache/phpfastcache": "^6.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "EngineDetector\\": "src/"
+        }
+    }
+}

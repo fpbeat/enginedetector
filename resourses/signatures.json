@@ -1,0 +1,256 @@
+{
+    "1C-Bitrix": {
+        "headers": {
+            "Set-Cookie": "BITRIX_",
+            "X-Powered-CMS": "Bitrix Site Manager"
+        },
+        "html": "(?:<link[^>]+components/bitrix|(?:src|href)=\"/bitrix/(?:js|templates))",
+        "script": "1c-bitrix"
+    },
+    "Amiro.CMS": {
+        "meta": {
+            "generator": "Amiro"
+        }
+    },
+    "Bigcommerce": {
+        "html": "<link href=[^>]+cdn\\d+\\.bigcommerce\\.com/",
+        "url": "mybigcommerce\\.com",
+        "script": "cdn\\d+\\.bigcommerce\\.com/"
+    },
+    "Blogger": {
+        "url": "^https?://[^/]+\\.blogspot\\.com",
+        "meta": {
+            "generator": "^Blogger$"
+        }
+    },
+    "CMS Made Simple": {
+        "meta": {
+            "generator": "CMS Made Simple"
+        },
+        "cookies": {
+            "CMSSESSID": ""
+        }
+    },
+    "CS Cart": {
+        "html": [
+            "&nbsp;Powered by (?:<a href=[^>]+cs-cart\\.com|CS-Cart)",
+            "\\.cm-noscript[^>]+</style>"
+        ]
+    },
+    "Danneo CMS": {
+        "headers": {
+            "X-Powered-By": "CMS Danneo ([\\d.]+)\\;version:\\1"
+        },
+        "meta": {
+            "generator": "Danneo CMS ([\\d.]+)\\;version:\\1"
+        }
+    },
+    "DataLife Engine": {
+        "meta": {
+            "generator": "DataLife Engine"
+        }
+    },
+    "Django": {
+        "html": "(?:powered by <a[^>]+>Django ?([\\d.]+)?</a>|<input[^>]*name=[\"']csrfmiddlewaretoken[\"'][^>]*>)\\;version:\\1"
+    },
+    "Drupal": {
+        "headers": {
+            "Expires": "19 Nov 1978",
+            "X-Drupal-Cache": "",
+            "X-Generator": "Drupal(?:\\s([\\d.]+))?\\;version:\\1"
+        },
+        "html": "<(?:link|style)[^>]+sites/(?:default|all)/(?:themes|modules)/",
+        "meta": {
+            "generator": "Drupal(?:\\s([\\d.]+))?\\;version:\\1"
+        },
+        "script": "drupal\\.js"
+    },
+    "IPB": {
+        "html": "<link[^>]+ipb_[^>]+\\.css",
+        "script": "jscripts/ips_",
+        "cookies": {
+            "ipbWWLmodpids": "",
+            "ipbWWLsession_id": ""
+        }
+    },
+    "InstantCMS": {
+        "meta": {
+            "generator": "InstantCMS"
+        },
+        "cookies": {
+            "InstantCMS[logdate]": ""
+        }
+    },
+    "Joomla": {
+        "headers": {
+            "X-Content-Encoded-By": "Joomla! ([\\d.]+)\\;version:\\1"
+        },
+        "html": "(?:<div[^>]+id=\"wrapper_r\"|<(?:link|script)[^>]+(?:feed|components)/com_|<table[^>]+class=\"pill)\\;confidence:50",
+        "url": "option=com_",
+        "meta": {
+            "generator": "Joomla!(?: ([\\d.]+))?\\;version:\\1"
+        }
+    },
+    "LiveStreet CMS": {
+        "headers": {
+            "X-Powered-By": "LiveStreet CMS"
+        }
+    },
+    "MODX": {
+        "headers": {
+            "X-Powered-By": "^MODX"
+        },
+        "html": [
+            "<a[^>]+>Powered by MODX</a>",
+            "<(?:link|script)[^>]+assets/snippets/\\;confidence:20",
+            "<form[^>]+id=\"ajaxSearch_form\\;confidence:20",
+            "<input[^>]+id=\"ajaxSearch_input\\;confidence:20"
+        ],
+        "meta": {
+            "generator": "MODX[^\\d.]*([\\d.]+)?\\;version:\\1"
+        }
+    },
+    "Magento": {
+        "html": [
+            "<script [^>]+data-requiremodule=\"mage/\\;version:2",
+            "<script [^>]+data-requiremodule=\"Magento_\\;version:2",
+            "<script type=\"text/x-magento-init\">"
+        ],
+        "script": [
+            "js/mage",
+            "skin/frontend/(?:default|(enterprise))\\;version:\\1?Enterprise:Community",
+            "static/_requirejs\\;confidence:50\\;version:2"
+        ],
+        "cookies": {
+            "frontend": "\\;confidence:50"
+        }
+    },
+    "MaxSite CMS": {
+        "meta": {
+            "generator": "MaxSite CMS"
+        }
+    },
+    "MediaWiki": {
+        "html": "(?:<a[^>]+>Powered by MediaWiki</a>|<[^>]+id=\"t-specialpages)",
+        "meta": {
+            "generator": "^MediaWiki ?(.+)$\\;version:\\1"
+        }
+    },
+    "MotoCMS": {
+        "html": "<link [^>]*href=\"[^>]*\\/mt-content\\/[^>]*\\.css",
+        "script": "/mt-includes/js/website(?:assets)?\\.(?:min)?\\.js"
+    },
+    "MyBB": {
+        "html": "(?:<script [^>]+\\s+<!--\\s+lang\\.no_new_posts|<a[^>]* title=\"Powered By MyBB)"
+    },
+    "OpenCart": {
+        "html": "(?:index\\.php\\?route=[a-z]+/|Powered By <a href=\"[^>]+OpenCart)"
+    },
+    "PrestaShop": {
+        "headers": {
+            "Powered-By": "^Prestashop$"
+        },
+        "html": [
+            "Powered by <a\\s+[^>]+>PrestaShop",
+            "<!-- /Block [a-z ]+ module (?:HEADER|TOP)?\\s?-->",
+            "<!-- /Module Block [a-z ]+ -->"
+        ],
+        "meta": {
+            "generator": "PrestaShop"
+        },
+        "cookies": {
+            "PrestaShop": ""
+        }
+    },
+    "S.Builder": {
+        "meta": {
+            "generator": "S\\.Builder"
+        }
+    },
+    "SMF": {
+        "html": "credits/?\" title=\"Simple Machines Forum\" target=\"_blank\" class=\"new_win\">SMF ([0-9.]+)</a>\\;version:\\1"
+    },
+    "Shopify": {
+        "html": "<link[^>]+=['\"]//cdn\\.shopify\\.com"
+    },
+    "SiteEdit": {
+        "meta": {
+            "generator": "SiteEdit"
+        }
+    },
+    "TYPO3 CMS": {
+        "html": "<(?:script[^>]+ src|link[^>]+ href)=[^>]+typo3temp/",
+        "url": "/typo3/",
+        "meta": {
+            "generator": "TYPO3\\s+(?:CMS\\s+)?([\\d.]+)?(?:\\s+CMS)?\\;version:\\1"
+        }
+    },
+    "Tilda": {
+        "html": "<link[^>]* href=[^>]+tilda(?:cdn|\\.ws|-blocks)",
+        "script": "tilda(?:cdn|\\.ws|-blocks)"
+    },
+    "UMI.CMS": {
+        "headers": {
+            "X-Generated-By": "UMI\\.CMS"
+        }
+    },
+    "Weebly": {
+        "script": "cdn\\d+\\.editmysite\\.com"
+    },
+    "Wix": {
+        "headers": {
+            "X-Wix-Renderer-Server": "",
+            "X-Wix-Request-Id": "",
+            "X-Wix-Server-Artifact-Id": ""
+        },
+        "script": "static\\.wixstatic\\.com",
+        "cookies": {
+            "Domain": "\\.wix\\.com"
+        }
+    },
+    "WordPress": {
+        "html": [
+            "<link rel=[\"']stylesheet[\"'] [^>]+wp-(?:content|includes)",
+            "<link[^>]+s\\d+\\.wp\\.com"
+        ],
+        "meta": {
+            "generator": "WordPress( [\\d.]+)?\\;version:\\1"
+        },
+        "script": "/wp-includes/"
+    },
+    "XenForo": {
+        "html": [
+            "(?:jQuery\\.extend\\(true, XenForo|Forum software by XenForo\u2122|<!--XF:branding|<html[^>]+id=\"XenForo\")",
+            "<html id=\"XF\" "
+        ],
+        "cookies": {
+            "xf_csrf": "",
+            "xf_session": ""
+        }
+    },
+    "Zen Cart": {
+        "meta": {
+            "generator": "Zen Cart"
+        }
+    },
+    "osCommerce": {
+        "html": "(?:<a[^>]*(?:\\?|&)osCsid|Powered by (?:<[^>]+>)?osCommerce</a>|<[^>]+class=\"[^>]*infoBoxHeading)",
+        "cookies": {
+            "osCsid": ""
+        }
+    },
+    "phpBB": {
+        "html": "(?:Powered by <a[^>]+phpbb|<a[^>]+phpbb[^>]+class=\\.copyright|\\tphpBB style name|<[^>]+styles/(?:sub|pro)silver/theme|<img[^>]+i_icon_mini|<table class=\"forumline)",
+        "meta": {
+            "copyright": "phpBB Group"
+        },
+        "cookies": {
+            "phpbb": ""
+        }
+    },
+    "uCoz": {
+        "cookies": {
+            "uCoz": ""
+        }
+    }
+}
