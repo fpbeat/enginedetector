@@ -69,7 +69,7 @@ class Wappalyzer extends AbstractHandler {
     public function setDetected(array $params) {
         list($engine, $type, $pattern, $value) = $params;
 
-        $app = ['type' => $type, 'engine' => $engine, 'version' => NULL, 'confidence' => 100, 'handler' => __CLASS__];
+        $app = ['type' => $type, 'engine' => $engine, 'version' => NULL, 'confidence' => 100, 'handler' => self::HANDLER_NAME];
 
         // Set confidence level
         if (isset($pattern['confidence'])) {

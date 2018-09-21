@@ -1,8 +1,6 @@
 <?php
 
 namespace EngineDetector\Handler;
-
-use EngineDetector\Exception\InvalidUrlException;
 use Noodlehaus\Config;
 
 abstract class AbstractHandler {
@@ -16,7 +14,7 @@ abstract class AbstractHandler {
      * AbstractHandler constructor.
      */
     public function __construct() {
-        $this->config = Config::load('./config/detector.php');
+        $this->config = Config::load(ENGINE_DETECTOR_DOCROOT . 'config/detector.php');
     }
 
     /**

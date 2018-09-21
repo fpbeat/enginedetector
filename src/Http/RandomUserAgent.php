@@ -11,7 +11,7 @@ trait RandomUserAgent {
      * @return string
      */
     public static function getRandomUserAgent() {
-        $config = Config::load('./config/useragents.php');
+        $config = Config::load(ENGINE_DETECTOR_DOCROOT . 'config/useragents.php');
 
         return Arr::getRandom($config->all());
     }
