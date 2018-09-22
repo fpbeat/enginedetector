@@ -17,7 +17,7 @@ class Parser {
      * @param array $headers
      * @param array $cookies
      */
-    public function __construct($url, $content, array $headers, array $cookies) {
+    public function __construct($url, $scheme, $content, array $headers, array $cookies) {
         $this->headers = $headers;
         $this->variables = Variables::factory($content, $url, $headers, $cookies);
     }
@@ -31,6 +31,18 @@ class Parser {
         foreach ($this->parse($patterns) as $pattern) {
             if (preg_match(sprintf('#%s#i', $pattern['regex']), $this->variables->getContent(), $match)) {
                 $this->setSuccessMatch($pattern, $match);
+
+                return TRUE;
+            }
+        }
+
+        return FALSE;
+    }
+
+    public function isLinkMatch($patterns, callable $validator) {
+        foreach ($this->parse($patterns) as $pattern) {
+            if (call_user_func($validator, $pattern['string'])) {
+                $this->setSuccessMatch($pattern, []);
 
                 return TRUE;
             }

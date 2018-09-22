@@ -19,7 +19,8 @@
         "meta": {
             "author": "DIAFAN.CMS"
         },
-        "html": "/userfls/\\;confidence:50"
+        "html": "/userfls/\\;confidence:50",
+        "link": "adm/css/errors.css\\;confidence:80"
     },
     "HostCMS": {
         "meta": {
@@ -116,21 +117,6 @@
             "X-Powered-By": "LiveStreet CMS"
         },
         "html": "LIVESTREET_SECURITY_KEY"
-    },
-    "MODX": {
-        "meta": {
-            "generator": "MODX[^\\d.]*([\\d.]+)?\\;version:\\1"
-        },
-        "headers": {
-            "X-Powered-By": "^MODX"
-        },
-        "html": [
-            "<a[^>]+>Powered by MODX</a>",
-            "<(?:link|script)[^>]+assets/snippets/\\;confidence:20",
-            "<form[^>]+id=\"ajaxSearch_form\\;confidence:20",
-            "<input[^>]+id=\"ajaxSearch_input\\;confidence:20"
-        ],
-        "script": "/assets/components/\\;confidence:20"
     },
     "Magento": {
         "html": [
@@ -276,5 +262,21 @@
         },
         "html": "(?:UCOZ-JS-INIT_CODE)",
         "script": "\\.s/src/uwnd\\.min\\.js"
+    },
+    "MODX": {
+        "meta": {
+            "generator": "MODX[^\\d.]*([\\d.]+)?\\;version:\\1"
+        },
+        "headers": {
+            "X-Powered-By": "^MODX"
+        },
+        "html": [
+            "<a[^>]+>Powered by MODX</a>",
+            "<(?:link|script)[^>]+assets/snippets/\\;confidence:20",
+            "<form[^>]+id=\"ajaxSearch_form\\;confidence:20",
+            "<input[^>]+id=\"ajaxSearch_input\\;confidence:20"
+        ],
+        "script": "/assets/components/\\;confidence:20",
+        "link": "manager/templates/default/css/index.css\\;confidence:80"
     }
 }

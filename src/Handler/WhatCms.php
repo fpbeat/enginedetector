@@ -27,7 +27,7 @@ class WhatCms extends AbstractHandler {
         ]);
     }
 
-    public function detect($url) {
+    public function detect($url, $hostname) {
         try {
             $request = $this->makeRequest($url);
 

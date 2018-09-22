@@ -3,9 +3,11 @@
 namespace EngineDetector\Handler;
 
 use EngineDetector\DetectResult;
+use EngineDetector\Utils\Http;
 use GuzzleHttp\Handler\CurlHandler;
 use GuzzleHttp\Cookie\CookieJar;
 use EngineDetector\Http\Request;
+use GuzzleHttp\TransferStats;
 
 class Wappalyzer extends AbstractHandler {
 
@@ -33,13 +35,14 @@ class Wappalyzer extends AbstractHandler {
 
     /**
      * @param string $url
+     * @param string $hostname
      *
      * @return DetectResult|null
      * @throws \EngineDetector\Exception\InvalidUrlException
      * @throws \GuzzleHttp\Exception\GuzzleException
      * @throws \ReflectionException
      */
-    public function detect($url) {
+    public function detect($url, $hostname) {
         $request = $this->makeRequest($url);
 
         $class = new \ReflectionClass('\\EngineDetector\\Handler\\Wappalyzer\\Parser');
@@ -47,10 +50,30 @@ class Wappalyzer extends AbstractHandler {
 
         foreach ($this->loadSignatures() as $name => $signature) {
             foreach ($signature as $type => $rule) {
-                if (call_user_func([$parser, sprintf('is%sMatch', ucfirst($type))], $rule)) {
-                    list($pattern, $value) = $parser->getSuccessMatch();
+                switch ($type) {
+                    case 'headers':
+                    case 'html':
+                    case 'url':
+                    case 'meta':
+                    case 'script':
+                    case 'cookies':
+                        if (call_user_func([$parser, sprintf('is%sMatch', ucfirst($type))], $rule)) {
+                            list($pattern, $value) = $parser->getSuccessMatch();
 
-                    return $this->setDetected([$name, $type, $pattern, $value]);
+                            return $this->setDetected([$name, $type, $pattern, $value]);
+                        }
+                        break;
+                    case 'link':
+                        if ($parser->isLinkMatch($rule, function ($link) use ($request, $hostname) {
+                            $url = sprintf('%s://%s/%s', $request['scheme'] ?: 'http', $hostname, ltrim($link, '/'));
+
+                            return Http::validateExisting($url);
+                        })) {
+                            list($pattern, $value) = $parser->getSuccessMatch();
+
+                            return $this->setDetected([$name, $type, $pattern, $value]);
+                        }
+                        break;
                 }
             }
         }
@@ -59,10 +82,7 @@ class Wappalyzer extends AbstractHandler {
     }
 
     /**
-     * @param string $engine
-     * @param string $type
-     * @param array $pattern
-     * @param array $value
+     * @param array $params
      *
      * @return DetectResult
      */
@@ -114,19 +134,23 @@ class Wappalyzer extends AbstractHandler {
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function makeRequest($url) {
+        $effectiveUri = NULL;
         $cookieJar = new CookieJar();
 
         $response = $this->client->request('GET', $url, [
             'allow_redirects' => TRUE,
-            'cookies' => $cookieJar
+            'cookies' => $cookieJar,
+            'on_stats' => function (TransferStats $stats) use (&$effectiveUri) {
+                $effectiveUri = $stats->getEffectiveUri();
+            }
         ]);
 
         $body = $response->getBody();
-        $content = $body->getContents();
 
         return [
             'url' => $url,
-            'content' => $content,
+            'scheme' => $effectiveUri instanceof \GuzzleHttp\Psr7\Uri ? $effectiveUri->getScheme() : NULL,
+            'content' => $body->getContents(),
             'headers' => $response->getHeaders(),
             'cookies' => $cookieJar->toArray()
         ];

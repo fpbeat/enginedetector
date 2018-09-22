@@ -22,7 +22,16 @@ class Arr {
      * @return array
      */
     public static function orderByKeys(array $input, array $order) {
-        return array_replace(array_flip(array_keys($order)), $input);
+        $ordered = [];
+        foreach ($order as $key) {
+            if (array_key_exists($key, $input)) {
+                $ordered[$key] = $input[$key];
+
+                unset($input[$key]);
+            }
+        }
+
+        return $ordered + $input;
     }
 
     /**

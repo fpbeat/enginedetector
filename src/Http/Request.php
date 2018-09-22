@@ -57,7 +57,7 @@ class Request {
             'handler' => $this->handler,
 
             'cookies' => TRUE,
-            'delay' => 500,
+            'delay' => 0,
             'timeout' => 5,
 
             'headers' => [

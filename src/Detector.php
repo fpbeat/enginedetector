@@ -78,7 +78,7 @@ class Detector {
             }
 
             foreach ($this->handlers as $handler) {
-                if (($result = $handler->detect($url)) instanceof DetectResult) {
+                if (($result = $handler->detect($url, $hostname)) instanceof DetectResult) {
                     if ($this->cache) {
                         $this->cache->set($hostname, $result->toArray());
                     }

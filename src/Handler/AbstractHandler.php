@@ -26,8 +26,9 @@ abstract class AbstractHandler {
 
     /**
      * @param string $url
+     * @param string $hostname
      *
      * @return mixed
      */
-    abstract public function detect($url);
+    abstract public function detect($url, $hostname);
 }
