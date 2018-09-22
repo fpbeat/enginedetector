@@ -15,8 +15,17 @@ class WhatCms extends AbstractHandler {
      * @var \GuzzleHttp\Client $client
      */
     private $client;
+
+    /**
+     * @var string $apiKey
+     */
     private $apiKey;
 
+    /**
+     * WhatCms constructor.
+     *
+     * @param string $apiKey
+     */
     public function __construct($apiKey) {
         parent::__construct();
 
@@ -27,6 +36,13 @@ class WhatCms extends AbstractHandler {
         ]);
     }
 
+    /**
+     * @param string $url
+     * @param string $hostname
+     *
+     * @return DetectResult|mixed|null
+     * @throws \Exception
+     */
     public function detect($url, $hostname) {
         try {
             $request = $this->makeRequest($url);
@@ -37,6 +53,12 @@ class WhatCms extends AbstractHandler {
         }
     }
 
+    /**
+     * @param array $response
+     *
+     * @return DetectResult|mixed|null
+     * @throws \Exception
+     */
     public function parse($response) {
         $json = json_decode($response['content'], TRUE);
 
@@ -51,6 +73,11 @@ class WhatCms extends AbstractHandler {
         return NULL;
     }
 
+    /**
+     * @param array $params
+     *
+     * @return DetectResult|mixed
+     */
     public function setDetected(array $params) {
         list($name, $version, $confidence) = $params;
 
@@ -63,6 +90,12 @@ class WhatCms extends AbstractHandler {
         ]);
     }
 
+    /**
+     * @param string $url
+     *
+     * @return array
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
     public function makeRequest($url) {
         $response = $this->client->request('GET', self::ENDPOINT, [
             'query' => [
