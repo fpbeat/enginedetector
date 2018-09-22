@@ -4,12 +4,31 @@
             "Set-Cookie": "BITRIX_",
             "X-Powered-CMS": "Bitrix Site Manager"
         },
-        "html": "(?:<link[^>]+components/bitrix|(?:src|href)=\"/bitrix/(?:js|templates))",
+        "html": [
+            "(?:<link[^>]+components/bitrix|(?:src|href)=\"/bitrix/(?:js|templates))",
+            "Bitrix24FormObject"
+        ],
         "script": "1c-bitrix"
     },
     "Amiro.CMS": {
         "meta": {
             "generator": "Amiro"
+        }
+    },
+    "DIAFAN.CMS": {
+        "meta": {
+            "author": "DIAFAN.CMS"
+        },
+        "html": "/userfls/\\;confidence:50"
+    },
+    "HostCMS": {
+        "meta": {
+            "author": "HostCMS"
+        },
+        "html": "hostcmsfiles/(?:css|js)/(?:[a-z0-9]{32})\\.",
+        "cookies": {
+            "HostCMSCounter": "",
+            "HostCMSCounterUser": ""
         }
     },
     "Bigcommerce": {
@@ -34,7 +53,8 @@
     "CS Cart": {
         "html": [
             "&nbsp;Powered by (?:<a href=[^>]+cs-cart\\.com|CS-Cart)",
-            "\\.cm-noscript[^>]+</style>"
+            "\\.cm-noscript[^>]+</style>",
+            "<link [^>]*href=\"[^>]*/var/cache/misc/assets/design"
         ]
     },
     "Danneo CMS": {
@@ -94,7 +114,8 @@
     "LiveStreet CMS": {
         "headers": {
             "X-Powered-By": "LiveStreet CMS"
-        }
+        },
+        "html": "LIVESTREET_SECURITY_KEY"
     },
     "MODX": {
         "meta": {
@@ -108,7 +129,8 @@
             "<(?:link|script)[^>]+assets/snippets/\\;confidence:20",
             "<form[^>]+id=\"ajaxSearch_form\\;confidence:20",
             "<input[^>]+id=\"ajaxSearch_input\\;confidence:20"
-        ]
+        ],
+        "script": "/assets/components/\\;confidence:20"
     },
     "Magento": {
         "html": [
