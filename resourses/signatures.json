@@ -6,6 +6,8 @@
         },
         "html": [
             "(?:<link[^>]+components/bitrix|(?:src|href)=\"/bitrix/(?:js|templates))",
+            "<link [^>]*href=\"[^>]*bitrix",
+            "bitrix-component",
             "Bitrix24FormObject"
         ],
         "script": "1c-bitrix"
@@ -277,7 +279,10 @@
             "<input[^>]+id=\"ajaxSearch_input\\;confidence:20"
         ],
         "script": "/assets/components/\\;confidence:20",
-        "link": "manager/templates/default/css/index.css\\;confidence:80"
+        "link": [
+            "manager/templates/default/css/index.css\\;confidence:80",
+            "assets/modules/store/css/style.css"
+        ]
     },
     "NetCat CMS": {
         "html": "(?:netcat_files|netcat_template)/",
