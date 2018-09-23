@@ -67,7 +67,7 @@ class Wappalyzer extends AbstractHandler {
                         if ($parser->isLinkMatch($rule, function ($link) use ($request, $hostname) {
                             $url = sprintf('%s://%s/%s', $request['scheme'] ?: 'http', $hostname, ltrim($link, '/'));
 
-                            return Http::validateExisting($url);
+                            return Http::validateExisting($url, $link);
                         })) {
                             list($pattern, $value) = $parser->getSuccessMatch();
 
