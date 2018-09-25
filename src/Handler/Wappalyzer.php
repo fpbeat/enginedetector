@@ -60,7 +60,7 @@ class Wappalyzer extends AbstractHandler {
                         if (call_user_func([$parser, sprintf('is%sMatch', ucfirst($type))], $rule)) {
                             list($pattern, $value) = $parser->getSuccessMatch();
 
-                            return $this->setDetected([$name, $type, $pattern, $value]);
+                            return $this->setDetected([$hostname, $name, $type, $pattern, $value]);
                         }
                         break;
                     case 'link':
@@ -71,7 +71,7 @@ class Wappalyzer extends AbstractHandler {
                         })) {
                             list($pattern, $value) = $parser->getSuccessMatch();
 
-                            return $this->setDetected([$name, $type, $pattern, $value]);
+                            return $this->setDetected([$hostname, $name, $type, $pattern, $value]);
                         }
                         break;
                 }
@@ -87,9 +87,9 @@ class Wappalyzer extends AbstractHandler {
      * @return DetectResult
      */
     public function setDetected(array $params) {
-        list($engine, $type, $pattern, $value) = $params;
+        list($hostname, $engine, $type, $pattern, $value) = $params;
 
-        $app = ['type' => $type, 'engine' => $engine, 'version' => NULL, 'confidence' => 100, 'handler' => self::HANDLER_NAME];
+        $app = ['type' => $type, 'name' => $engine, 'version' => NULL, 'confidence' => 100, 'handler' => self::HANDLER_NAME, 'hostname' => $hostname];
 
         // Set confidence level
         if (isset($pattern['confidence'])) {

@@ -47,7 +47,7 @@ class WhatCms extends AbstractHandler {
         try {
             $request = $this->makeRequest($url);
 
-            return $this->parse($request);
+            return $this->parse($request, $hostname);
         } catch (\GuzzleHttp\Exception\RequestException $e) {
             throw new \Exception('Error calling WhatCMS API service');
         }
@@ -59,7 +59,7 @@ class WhatCms extends AbstractHandler {
      * @return DetectResult|mixed|null
      * @throws \Exception
      */
-    public function parse($response) {
+    public function parse($response, $hostname) {
         $json = json_decode($response['content'], TRUE);
 
         if (json_last_error() !== JSON_ERROR_NONE) {
@@ -67,7 +67,7 @@ class WhatCms extends AbstractHandler {
         }
 
         if (intval($json['result']['code']) === 200) {
-            return $this->setDetected([$json['result']['name'], $json['result']['version'], $json['result']['confidence']]);
+            return $this->setDetected([$hostname, $json['result']['name'], $json['result']['version'], $json['result']['confidence']]);
         }
 
         return NULL;
@@ -79,14 +79,15 @@ class WhatCms extends AbstractHandler {
      * @return DetectResult|mixed
      */
     public function setDetected(array $params) {
-        list($name, $version, $confidence) = $params;
+        list($hostname, $name, $version, $confidence) = $params;
 
         return new DetectResult([
             'type' => NULL,
-            'engine' => $name,
+            'name' => $name,
             'version' => $version,
             'confidence' => $confidence,
-            'handler' => self::HANDLER_NAME
+            'handler' => self::HANDLER_NAME,
+            'hostname' => $hostname
         ]);
     }
 
