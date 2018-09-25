@@ -6,6 +6,7 @@ use EngineDetector\Exception\InvalidUrlException;
 use EngineDetector\Exception\RequestException;
 use EngineDetector\Exception\UnknownEngineException;
 use EngineDetector\Handler\AbstractHandler;
+use EngineDetector\Utils\Arr;
 
 class Detector {
 
@@ -33,12 +34,13 @@ class Detector {
     }
 
     /**
-     * @param $url
+     * @param string $url
+     * @param string|null $component
      *
-     * @return array
+     * @return array|string
      * @throws InvalidUrlException
      */
-    private function processURL($url) {
+    public function processURL($url, $component = NULL) {
         $url = trim($url);
 
         if (!preg_match('/^https?:\/\//iu', $url)) {
@@ -50,8 +52,9 @@ class Detector {
         }
 
         $hostname = preg_replace('/^www./iu', '', parse_url($url, PHP_URL_HOST));
+        $output = ['hostname' => $hostname, 'url' => $url];
 
-        return [mb_strtolower($hostname), $url];
+        return Arr::get($output, $component, array_values($output));
     }
 
     /**
