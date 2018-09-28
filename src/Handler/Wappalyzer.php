@@ -100,9 +100,13 @@ class Wappalyzer extends AbstractHandler {
         if (isset($pattern['version'])) {
             if (preg_match('/^(\\\\)?([a-z0-9]+)(?:\?(.+))?$/i', $pattern['version'], $versionMatch)) {
                 if ($versionMatch[1] === '\\') {
-                    $version = trim($value[intval($versionMatch[2])]);
+                    $version = isset($value[intval($versionMatch[2])]) ? trim($value[intval($versionMatch[2])]) : NULL;
 
-                    $app['version'] = isset($version) && !empty($version) ? $version : $versionMatch[3];
+                    if (!empty($version)) {
+                        $app['version'] = $version;
+                    } elseif (isset($versionMatch[3])) {
+                        $app['version'] = $versionMatch[3];
+                    }
                 } else {
                     $app['version'] = $versionMatch[2];
                 }
